@@ -12,11 +12,12 @@ class TestCallRun2 extends Thread {
 		}
 	}
 
-	public static void main(String args[]) {
+	public static void main(String args[]) throws InterruptedException {
 		TestCallRun2 t1 = new TestCallRun2();
 		TestCallRun2 t2 = new TestCallRun2();
 
-		t1.run();
-		t2.run();
+		//t1.run();
+		//t2.run();
+		Thread.sleep(100L);
 	}
 }
