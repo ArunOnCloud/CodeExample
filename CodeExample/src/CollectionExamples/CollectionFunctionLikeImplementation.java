@@ -8,7 +8,9 @@ public class CollectionFunctionLikeImplementation {
 		IncrementInt incrementInteger=new IncrementIntImpl();
 		incrementInteger.setData(10);
 		System.out.println(incrementInteger.getData());
+		System.out.println(incrementInteger);
 		CustomIncrementExample.increment(incrementInteger);
+		System.out.println(incrementInteger);
 		System.out.println(incrementInteger.getData());
 
 	}
