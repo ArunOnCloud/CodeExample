@@ -3,6 +3,7 @@ package practice;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TreeMap;
 
 public class runTests {
 
@@ -25,17 +26,40 @@ public class runTests {
 //        Date date=format.parse("2016-10-06 12:40 PM");
 //        
 //        System.out.println("date:"+date.toString());
-		double lat1=28.693395;
-		double lat2=28.692482;
-		double lon1=77.148990;
-		double lon2=77.151720;
-		runTests test=new runTests();
-		double dis=test.distance(lat1, lon1, lat2, lon2);
-		System.out.println("dis:"+dis);
+//		double lat1=28.693395;
+//		double lat2=28.692482;
+//		double lon1=77.148990;
+//		double lon2=77.151720;
+//		runTests test=new runTests();
+//		double dis=test.distance(lat1, lon1, lat2, lon2);
+//		System.out.println("dis:"+dis);
+//		Thread.sleep(10000L);
 		
-		
-		
-        
+//		String str="128888888888888888888888888888888888888888888888888888888888888888888888888888";
+////       String str="128888888";
+//		Integer b=null;
+//		
+//		try{
+//			b=Integer.parseInt(str);
+//			System.out.println(b);
+//			
+//		}catch(NumberFormatException e)
+//		{
+//			
+//		e.printStackTrace();
+//		}
+//		
+		String name="phonebook(2)";
+		int f=name.indexOf("(");
+		int e=name.indexOf(")");
+		System.out.println(name.substring(f+1, e));
+		System.out.println(name.substring(0,f));
+		TreeMap<String,Integer> treeMap=new TreeMap<String,Integer>();
+        treeMap.put("1", 1);
+        System.out.println(treeMap.get("1"));
+        treeMap.put("1", 2);
+        System.out.println(treeMap.get("1"));
+        treeMap.remove("3");
 
 	}
 	
