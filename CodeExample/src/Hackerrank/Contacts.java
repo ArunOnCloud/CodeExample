@@ -104,9 +104,15 @@ class Trie{
 		    	return node.count;
 		    }else
 		    {
-		    	
+		    	if(node.next[ind]==null)
+				{
+					return 0;
+				}else
+				{
+					return find(s,i+1,node.next[ind]);
+				}
 		    }
 		}
-		return 0;
+		//return 0;
 	}
 }
