@@ -59,7 +59,8 @@ public class LongestPalindrom {
         		dp[i][j]=1;
         	}
         }
-        int res=sol(arr,a,dp,0,m-1);
+        //int res=sol(arr,a,dp,0,m-1);
+        int res=solu(arr,a,dp);
         System.out.println(res);
 		
 		
@@ -107,6 +108,31 @@ public class LongestPalindrom {
 	   }
 		return dp[i][j];   
 	   
+	}
+	
+	public static int solu(int[] arr,int[] a,int[][] dp){
+		int n=a.length;
+		
+		for(int len=2;len<=n;len++)
+		{
+			for(int i=0;i<n-len+1;i++)
+			{
+				int j=i+len-1;
+				//System.out.println(" arr len:"+len+ " i:"+i);
+				if(arr[a[i]] == arr[a[j]] && len==2)
+				{
+					dp[i][j]=2;
+				}else if(arr[a[i]] == arr[a[j]] )
+				{
+					dp[i][j]=dp[i+1][j-1]+2;
+				}else
+				{
+					dp[i][j]=max(dp[i+1][j],dp[i][j-1]);
+				}
+			}
+		}
+		
+		return dp[0][n-1];
 	}
 	public static int max(int a,int b)
 	{
