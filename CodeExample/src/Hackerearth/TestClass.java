@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 
-import com.sun.java_cup.internal.runtime.Scanner;
 
 public class TestClass {
 
