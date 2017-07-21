@@ -47,13 +47,14 @@ public class PassByValueConcept {
 
 class Pair{
 	int x;
-	@Override
-	public String toString() {
-		return "Pair [x=" + x + ", y=" + y + "]";
-	}
+	
 	int y;
 	Pair(){
 		x=0;
 		y=0;
+	}
+	@Override
+	public String toString() {
+		return "Pair [x=" + x + ", y=" + y + "]";
 	}
 }
