@@ -101,6 +101,151 @@ public class Node{
 			}
 		}
 	}
+	public static Node LCA(Node node,int n1,int n2)
+	{
+		 int t1,t2;
+	        if(n1 < n2)
+	        {
+	            t1=n1;
+	            t2=n2;
+	        }else
+	        {
+	            t1=n2;
+	            t2=n1;
+	        }
+	       return lcaInBst(node,t1,t2);
+	}
+	public static Node lcaInBst(Node node,int n1,int n2)
+	{
+		if(node!=null)
+		{
+			if(node.data > n2)
+			{
+				return lcaInBst(node.left,n1,n2);
+			}else if(node.data < n1)
+			{
+				return lcaInBst(node.right,n1,n2);
+			}else 
+			{
+				return node;
+			}
+		
+		}else
+		{
+			return null;
+		}
+	}
+//	public static Node buildBst()
+//	{
+//		
+//	}
+	public static Node buildBalancedBstFromSortedArray(int[] arr)
+	{
+		Node root=null;
+		
+		root=buildBalancedBstFromSortedArrayUtil(arr,0,arr.length-1);
+		return root;
+	}
+	public static Node buildBalancedBstFromSortedArrayUtil(int[] arr,int x,int y)
+	{
+		int mid=(x+y)/2;
+		if(y-x >1)
+		{
+			Node cur=new Node();
+			cur.data=arr[mid];
+			cur.left=buildBalancedBstFromSortedArrayUtil(arr,x,mid-1);
+			cur.right=buildBalancedBstFromSortedArrayUtil(arr,mid+1,y);
+			return cur;
+		}else
+		{
+			Node cur=new Node();
+			cur.data=arr[mid];
+			return cur;
+		}
+	}
+	
+	public static  Node inorderSuccessorInBst(Node root ,Node k)
+	{
+		if(root != null)
+		{
+			return inorderSuccessorInBstUtil( root,k);
+			
+		}else
+		{
+			return null;
+		}
+	}
+	public static Node inorderSuccessorInBstUtil(Node root,Node k)
+	{
+		if(root != null)
+		{
+			Node cur,par,result;
+			par=null;
+			cur=root;
+			while(cur.data != k.data)
+			{
+				if(k.data < cur.data)
+				{
+					par=cur;
+					cur=cur.left;
+					
+				}
+				if(k.data > cur.data)
+				{
+					//par=cur;
+					cur=cur.right;
+					
+				}
+				
+			}
+			
+			if(cur.right == null)
+				{
+				 return par;
+				}
+			else
+			{
+				Node temp=cur.right;
+				while(temp.left !=null)
+				{
+					temp=temp.left;
+				}
+				return temp;
+				
+			}
+		}
+		return null;
+	}
+	
+	public static void printBstElementInGivenRange(Node node,int k1,int k2)
+	{
+		if(node!=null)
+		{
+			if(node.data > k2)
+			{
+				printBstElementInGivenRange(node.left,k1,k2);
+			}else if(node.data < k1)
+			{
+				printBstElementInGivenRange(node.right,k1,k2);
+			}else
+			{
+				printBstElementInGivenRangeUtil(node,k1,k2);
+			}
+		}
+		
+	}
+	public static void printBstElementInGivenRangeUtil(Node node,int k1,int k2){
+		if(node!=null)
+		{
+			printBstElementInGivenRangeUtil(node.left,k1,k2);
+			if(node.data >=k1 && node.data <=k2)
+			{
+				System.out.println(node.data + " ");
+			}
+			printBstElementInGivenRangeUtil(node.right,k1,k2);
+		}
+		
+	}
 	public static void printrightView(Node node)
 	{
 		if(node!=null)
