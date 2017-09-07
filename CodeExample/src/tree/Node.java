@@ -23,8 +23,9 @@ public class Node{
 		levelOrderTraversal(n);
 		//printLeftView(n);
 		//printrightView(n);
-		printTopView(n);
+		//printTopView(n);
 		//System.out.println("finish");
+		System.out.println(largestBstInTree( n));
 	}
 	
 	public void diameterOfTree(Node root,Node first,Node second){
@@ -389,6 +390,74 @@ public class Node{
 		else
 			return r;
 	}
+	
+	public static Node head;
+	public static Node binaryTreetoDLL(Node root)
+	{
+		if(root!=null)
+		{
+			 Node left=binaryTreetoDLL(root.left);
+			 Node right=binaryTreetoDLL(root.right);
+			 if(left!=null)
+			 {
+				 while(left.right!=null)
+			 
+				 {
+					 left=left.right;
+				 }
+				 root.left=left;
+				 left.right=root;
+			 }else
+			 {
+				 root.left=null;
+			 }
+			 if(right!=null)
+			 {
+				 while(right.left!=null)
+				 {
+					 right=right.left;
+				 }
+				 right.left=root;
+				 root.right=right;
+			 }else
+			 {
+				 root.right=null;
+			 }
+			 
+			return root;
+		}else
+		{
+			return null;
+		}
+		
+	}
+    static int highest;
+	public static int largestBstInTree(Node root)
+	{
+		int prev=Integer.MIN_VALUE;
+		largestBstInTreeUtil(root, prev, 0);
+		return highest;
+		
+	}
+	public static void largestBstInTreeUtil(Node root,int prev,int count)
+	{
+		if(root!=null)
+		{
+			largestBstInTreeUtil(root.left,prev,count);
+			if(!(prev>root.data))
+			{
+				count++;
+				if(highest<count)
+					highest=count;
+			}else
+			{
+				count=1;
+			}
+			largestBstInTreeUtil(root.right,root.data,count);
+		}
+		
+	}
+	
 	
 	
 }
