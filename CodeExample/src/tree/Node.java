@@ -458,6 +458,8 @@ public class Node{
 		
 	}
 	
-	
+	public static void checkMirrorOfTree(Node node){
+		
+	}
 	
 }
