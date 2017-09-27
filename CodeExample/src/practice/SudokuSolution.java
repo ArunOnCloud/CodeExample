@@ -1,27 +1,112 @@
 package practice;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class SudokuSolution {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		SudokuSolution sudokuSolution=new SudokuSolution();
+       char[][] board= {{'.','.','9','7','4','8','.','.','.'},
+    		   {'7','.','.','.','.','.','.','.','.'},
+    		   {'.','2','.','1','.','9','.','.','.'},
+    		   {'.','.','7','.','.','.','2','4','.'},
+    		   {'.','6','4','.','1','.','5','9','.'},
+    		   {'.','9','8','.','.','.','3','.','.'},
+    		   {'.','.','.','8','.','3','.','2','.'},
+    		   {'.','.','.','.','.','.','.','.','6'},
+    		   {'.','.','.','2','7','5','9','.','.'}};
+       for(int i=0;i<9;i++)
+       {
+    	   for(int j=0;j<9;j++)
+    	   {
+    		   System.out.print(board[i][j]+ " ");
+    	   }
+    	   System.out.println();
+       }
+       char[][] board1= {{'9','.','9','7','4','8','.','.','.'},
+    		   {'7','.','.','.','.','.','.','.','.'},
+    		   {'.','2','.','1','.','9','.','.','.'},
+    		   {'.','.','7','.','.','.','2','4','.'},
+    		   {'.','6','4','.','1','.','5','9','.'},
+    		   {'.','9','8','.','.','.','3','.','.'},
+    		   {'.','.','.','8','.','3','.','2','.'},
+    		   {'.','.','.','.','.','.','.','.','6'},
+    		   {'.','.','.','2','7','5','9','.','.'}};
+       System.out.println(sudokuSolution.checkBox(board1, 0, 0));
+       sudokuSolution.solveSudoku(board);
+       
 	}
+	
+	public void printBoard(char[][] board)
+	{
+		for(int i=0;i<9;i++)
+	       {
+	    	   for(int j=0;j<9;j++)
+	    	   {
+	    		   System.out.print(board[i][j]+ " ");
+	    	   }
+	    	   System.out.println();
+	       }
+	}
+	
+	
 	
 	public void solveSudoku(char[][] board)
 	{
 		char[][] boardUtil=board.clone();
-		solveSudokuUtil(board, boardUtil, 0, 0);
+		solveSudokuUtil(board, boardUtil, 0);
+		printBoard(boardUtil);
 	}
 	
-	public boolean solveSudokuUtil(char[][] board,char[][] boardUtil,int r,int c)
+	public boolean solveSudokuUtil(char[][] board,char[][] boardUtil,int ind)
 	{
 		boolean result=false;
 		int count=0;
+		int r=ind/9;
+		int c=ind%9;
+		if(ind>=81)
+		{
+			return false;
+		}
+		System.out.println("r:"+r+ " c:"+c);
+		if(boardUtil[r][c] == '.')
+		{
+			for(int i=1;i<10;i++)
+			{
+			
+				int val= (int)(board[r][c]-'0');
+				boardUtil[r][c]= (char)(i + (int)'0');
+				System.out.println("r:"+r+ " c:"+c);
+				System.out.println("i:"+i);
+				if(isSafe(boardUtil, r, c))
+				{
+					if(solveSudokuUtil(board, boardUtil, ind+1))
+					{
+						return true;
+					}else
+					{
+						boardUtil[r][c]='.';
+					}
+				}
+				if(i==9)
+				{
+					boardUtil[r][c]='.';
+				}
+								
+			}
+		}else
+		{
+			if(ind<81)
+			{
+				return solveSudokuUtil(board,boardUtil,ind+1);
+			}
+		}
 		
-		for(int i=r;i<board.length;i++)
+		
+		/*for(int i=r;i<board.length;i++)
 		{
 			int m=0;
 		    if(count==0)
@@ -49,7 +134,7 @@ public class SudokuSolution {
 			}
 			count++;
 		}
-		
+		*/
 		return false;
 		
 		
@@ -110,7 +195,38 @@ public class SudokuSolution {
 		return result;
 		
 	}
-
+     
+	public boolean checkBox(char[][] board,int r,int c)
+	{
+		int i=(r/3) * 3;
+		int j=(c/3) * 3;
+		int i1=i+3;
+		int j1=j+3;
+		Set<Integer> set=new HashSet<Integer>();
+		for(i=i;i<i1;i++)
+		{
+			for(j=j;j<j1;j++)
+			{
+				if(board[i][j] != '.')
+			     {
+					int val= (int)(board[i][j]-'0');
+					if(set.contains(val))
+					{
+						return false;
+					}else
+					{
+						set.add(val);
+					}
+				}
+			}
+		}
+		return true;
+		
+	}
+	public boolean isSafe(char[][] board,int r,int c )
+	{
+		return checkBox(board, r, c) && checkColumn(board, r, c) && checkRow(board, r, c);
+	}
 	public boolean validateBoard(char[][] board)
 	{
 		boolean result=true;
