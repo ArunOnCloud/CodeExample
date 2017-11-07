@@ -19,8 +19,23 @@ public class Node {
 	
 	public static void addOneToLinKlist(Node node)
 	{
+		if(node != null)
+		{
+			
+		}else
+		{
+			
+		}
 		
 	}
+	
+	public static void testLinkListOneAddition()
+	{
+		
+	}
+	
+	
+	
 	
 	public static void printList(Node head)
 	{

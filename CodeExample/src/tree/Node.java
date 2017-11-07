@@ -7,6 +7,7 @@ public class Node{
 	int data;
 	Node left;
 	Node right;
+	Node nextRight;
 	
 	public static void main(String[] args)
 	{
@@ -68,6 +69,48 @@ public class Node{
 			q2=q3;
 			System.out.println();
 		}
+	}
+	public static void connectNodesAtSameLevel(Node root)
+	{
+		Queue<Node> q1=new LinkedList<Node>();
+        Queue<Node> q2=new LinkedList<Node>();
+        q1.add(root);
+        root.nextRight=null;
+        while(q1.isEmpty() == false )
+        {
+            Node prev=null;
+            while(q1.isEmpty() == false)
+            {
+                Node temp=q1.peek();
+                if(prev !=null)
+                {
+                    prev.nextRight=temp;
+                    prev=temp;
+                }else
+                {
+                    prev=temp;
+                }
+                
+                q1.remove();
+                if(temp.left!=null)
+                {
+                    q2.add(temp.left);
+                }
+                if(temp.right!=null)
+                {
+                    q2.add(temp.right);
+                }
+                
+            }
+            if(prev!=null)
+            {
+                prev.nextRight=null;
+            }
+            Queue<Node> q3=q1;
+            q1=q2;
+            q2=q3;
+            
+        }
 	}
 	public static void printLeftView(Node node)
 	{

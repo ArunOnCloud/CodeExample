@@ -40,11 +40,25 @@ public class TestClass {
 
         System.out.println("Hello World!");
         
-        A a=new A();
+      /*  A a=new A();
         a.print();
         
         a=new B();
         a.print();
+        */
+        
+        int val=1;
+        System.out.println(val);
+        while(val <1000)
+        {
+        	//val <<=1;
+        	
+        	val = val << 1;
+        }
+        System.out.println(val);
+
+        
+        
     }
     
 }

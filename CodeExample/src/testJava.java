@@ -1,3 +1,5 @@
+import java.util.LinkedHashMap;
+
 class pair
  {
 	 public int x;
@@ -31,6 +33,16 @@ public class testJava {
 		System.out.println("a:"+a+" b:"+b);
 		swap(a,b);
 		System.out.println("a.x:"+a.x+" a.y:"+a.y+" b:"+b.x);
+		//LinkedHashMap<K, V>
+		String aa="";
+		aa.hashCode();
+		LinkedHashMap<String,String> val=new LinkedHashMap<String,String> ();
+		val.hashCode();
+		Object obj;
+		testJava tj=new testJava();
+		testJava.Person p=tj.new Person();
+		p.hashCode();
+		
 
 	}
 	public static void swap(pair a,pair b)
@@ -42,6 +54,11 @@ public class testJava {
 		a=c;
 		System.out.println("adftera a:"+a+" b:"+b);
 		System.out.println("inasdi a.x:"+a.x+" a.y:"+a.y+" b:"+b.x);
+	}
+	
+	class Person{
+		String name;
+		int id;
 	}
 	
 
