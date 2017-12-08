@@ -10,17 +10,17 @@ public class Permutaion {
 	
 	public static void fun(StringBuilder s,int ind)
 	{
-		System.out.println("ind:"+ind);
+		//System.out.println("ind:"+ind);
 		if(ind==s.length())
 		{
 			System.out.println(s);
 			return;
 		}else
 		{
-			for(int i=ind+1;i<s.length();i++)
+			for(int i=ind;i<s.length();i++)
 			{
 				//s.setCharAt(i, arg1);
-				System.out.println("i:"+i);
+				//System.out.println("i:"+i);
 				swap(s,i,ind);
 				fun(s,i+1);
 				swap(s,i,ind);

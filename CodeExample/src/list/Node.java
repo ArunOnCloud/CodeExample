@@ -11,7 +11,22 @@ public class Node {
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub\
+
 		testReverseInChunk();
+
+		Node a=new Node(1);
+		a.next=new Node(2);
+	    a.next.next=new Node(3);
+	   // a.next.next.next=new Node(4);
+	    //a.next.next.next.next=a.next;
+	    System.out.println(Node.detectCyle(a));
+	    Node head=reverse(a);
+	    while(head!=null)
+	    {
+	    	System.out.print(head.data+" -> ");
+	    	head=head.next;
+	    }
+
 	    
 		
 
@@ -99,6 +114,25 @@ public class Node {
 		
 	}
 	
+	public static  Node reverse(Node head)
+   {
+        // add code here
+		if(head==null)
+			return head;
+        return reverseUtil(null,head);
+   }
+	public static Node reverseUtil(Node prev,Node head)
+	{
+		if(head!=null)
+		{
+			Node res=reverseUtil(head,head.next);
+			head.next=prev;
+			return res;
+		}else
+		{
+			return prev;
+		}
+	}
 
 	/*public static int removeCycleInList(Node head)
 	{
