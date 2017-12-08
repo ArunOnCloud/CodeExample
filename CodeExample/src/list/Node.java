@@ -25,6 +25,8 @@ public class Node {
 	    {
 	    	System.out.print(head.data+" -> ");
 	    	head=head.next;
+	    	
+	    	
 	    }
 
 	    
