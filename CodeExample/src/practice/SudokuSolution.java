@@ -56,12 +56,20 @@ public class SudokuSolution {
 	
 	public void solveSudoku(char[][] board)
 	{
-		char[][] boardUtil=board.clone();
-		solveSudokuUtil(board, boardUtil, 0);
+		//char[][] boardUtil=board.clone();
+		char[][] boardUtil=new char[9][9];
+		for(int i=0;i<9;i++)
+		{
+			for(int j=0;j<9;j++)
+				boardUtil[i][j]=board[i][j];
+		}
+		//solveSudokuUtil(board, boardUtil);
+		solveUtil(board,boardUtil);
 		printBoard(boardUtil);
+		System.out.println(checkBox(boardUtil, 1, 1));
 	}
-	
-	public boolean solveSudokuUtil(char[][] board,char[][] boardUtil,int ind)
+	int ind=0;
+	public boolean solveSudokuUtil(char[][] board,char[][] boardUtil)
 	{
 		boolean result=false;
 		int count=0;
@@ -83,11 +91,12 @@ public class SudokuSolution {
 				System.out.println("i:"+i);
 				if(isSafe(boardUtil, r, c))
 				{
-					if(solveSudokuUtil(board, boardUtil, ind+1))
+					if(solveSudokuUtil(board, boardUtil))
 					{
 						return true;
 					}else
 					{
+						ind--;
 						boardUtil[r][c]='.';
 					}
 				}
@@ -101,7 +110,7 @@ public class SudokuSolution {
 		{
 			if(ind<81)
 			{
-				return solveSudokuUtil(board,boardUtil,ind+1);
+				return solveSudokuUtil(board,boardUtil);
 			}
 		}
 		
@@ -203,13 +212,13 @@ public class SudokuSolution {
 		int i1=i+3;
 		int j1=j+3;
 		Set<Integer> set=new HashSet<Integer>();
-		for(i=i;i<i1;i++)
+		for(int m=i;m<i1;m++)
 		{
-			for(j=j;j<j1;j++)
+			for(int n=j;n<j1;n++)
 			{
-				if(board[i][j] != '.')
+				if(board[m][n] != '.')
 			     {
-					int val= (int)(board[i][j]-'0');
+					int val= (int)(board[m][n]-'0');
 					if(set.contains(val))
 					{
 						return false;
@@ -246,6 +255,66 @@ public class SudokuSolution {
 		}
 		return true;
 	}
-
+    
+	public boolean solveUtil(char[][] board,char[][] boardUtil){
+		if(ind>=81)
+		{
+			return true;
+		}else 
+		{	
+			int r=ind/9;
+			int c=ind%9;
+			if(ind == 15)
+			{
+				//System.out.println();
+			}
+			if(boardUtil[r][c] == '.')
+			{
+				for(int i=1;i<=9;i++)
+				{
+					Integer intVal=i;
+					
+					char ch=intVal.toString().charAt(0);
+					boardUtil[r][c]=ch;
+					if(isSafe(boardUtil, r, c)){
+						ind++;
+						if(solveUtil(board, boardUtil))
+						{
+							//ind++;
+							return true;
+						}else
+						{
+							//ind--;
+							//boardUtil[r][c] = '.';
+							//return false;
+						}
+					}else
+					{
+						
+					}
+				}
+				if((9*r +c) == 15)
+				{
+					//System.out.println();
+				}
+				boardUtil[r][c] = '.';
+				ind--;
+				return false;
+				
+			}else
+			{
+			  ind++;
+			  if(solveUtil(board, boardUtil))
+			  {
+				  return true;
+			  }else
+			  {
+				  ind--;
+				  return false;
+			  }
+			  //return solveUtil(board, boardUtil); 
+			}
+		}
+	}
 
 }
