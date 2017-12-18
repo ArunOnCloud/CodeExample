@@ -22,7 +22,7 @@ public class Permutaion {
 				//s.setCharAt(i, arg1);
 				//System.out.println("i:"+i);
 				swap(s,i,ind);
-				fun(s,i+1);
+				fun(s,ind+1);
 				swap(s,i,ind);
 			}
 		}
