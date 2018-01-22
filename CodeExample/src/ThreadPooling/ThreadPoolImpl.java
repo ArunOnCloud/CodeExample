@@ -26,7 +26,7 @@ public class ThreadPoolImpl {
 		// TODO Auto-generated method stub
 		
 		ThreadPoolImpl threadPoolImpl=new ThreadPoolImpl(5);
-		for(int i=0;i<10;i++)
+		for(int i=0;i<100;i++)
 		{
 			
 			threadPoolImpl.execute(new TaskThread(i));
@@ -64,11 +64,13 @@ public class ThreadPoolImpl {
 						}
 					}
 					 task=queue.poll();
+					/* System.out.print("worker thread:"+ number+" ");
+						task.run();*/
 					
 				}
 				System.out.print("worker thread:"+ number+" ");
 				task.run();
-				//task=null;
+				task=null;
 				
 				
 				
