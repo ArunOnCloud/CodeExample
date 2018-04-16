@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class ErasureError {
 	public static void main(String[] args) throws IOException {
-		ArrayList al = new ArrayList();
+		ArrayList<String> al = new ArrayList<String>();
 		al.add("a");
 		al.add("b");
 		System.out.println("println");
@@ -18,7 +18,7 @@ public class ErasureError {
     	  System.out.println(s);
        }
 		//accept(al);// it
-		accept(al);// it
+		//accept(al);// it
 	}
  //below implementation with line 13 give compilation error because erasure is implementated at compilation level
 	

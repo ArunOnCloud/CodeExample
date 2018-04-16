@@ -9,7 +9,7 @@ public class TrickeyInheritance {
 		
 		B2 b=new B2();
 		
-		System.out.println(b.sum(2.0f, 3, 4));
+		//System.out.println(b.sum(2.0f, 3, 4));
 
 	}
 	
@@ -22,13 +22,13 @@ class A2{
 	}
 }
 class B2 extends A2{
-	int sum(int a,int b,int c) {
+	/*int sum(int a,int b,int c) {
 		return a+b+c;
+	}*/
+	void  sum(int a) {
+		//return (a+b);
 	}
-	int sum(int a,int b) {
-		return (a+b);
-	}
-	float sum(float a,int b,int c) {
+	/*float sum(float a,int b,int c) {
 		return (float)(a+b+c);
-	}
+	}*/
 }

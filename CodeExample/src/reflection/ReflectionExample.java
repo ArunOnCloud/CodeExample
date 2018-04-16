@@ -7,6 +7,13 @@ public class ReflectionExample {
 		Class c=Simple.class;
 		Simple simple=(Simple)c.newInstance();
 		simple.print();
+		Class re=ReflectionExample.class;
+		Class ce=ReflectionExample.class;
+		if(re == ce) {
+			System.out.println("arun");
+		}else {
+			System.out.println("arun: asddf");
+		}
 
 	}
 
