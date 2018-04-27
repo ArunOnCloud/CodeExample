@@ -11,7 +11,9 @@ public class ReflectionExample {
 		Class ce=ReflectionExample.class;
 		if(re == ce) {
 			System.out.println("arun");
+			System.out.println(re);
 		}else {
+			
 			System.out.println("arun: asddf");
 		}
 

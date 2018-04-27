@@ -5,8 +5,8 @@ public class EditDistance {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		EditDistance editDistance=new EditDistance();
-		System.out.println(editDistance.minDistance("abc", "aabc"));
-		System.out.println(editDistance.editDistDP("abc", "aabc"));
+		System.out.println(editDistance.minDistance("a", "aabc"));
+		System.out.println(editDistance.editDistDP("a", "aabc"));
 	}
 
 
@@ -15,8 +15,8 @@ public class EditDistance {
         
         int n=A.length();
         int m=B.length();
-        int[][] arr=new int[n][m];
-        for(int i=0;i<n;i++) {
+        int[][] arr=new int[n+1][m+1];
+        /*for(int i=0;i<n;i++) {
         	if(A.charAt(i) == B.charAt(0)) {
         		arr[i][0]=0;
         	}else {
@@ -29,13 +29,21 @@ public class EditDistance {
         	}else {
         		arr[0][i]=i+1;
         	}
-        }
-        for(int i=1;i<n;i++){
-            for(int j=1;j<m;j++){
+        }*/
+        for(int i=0;i<=n;i++){
+            for(int j=0;j<=m;j++){
+            	if(i == 0) {
+            		arr[i][j]=j;
+            		continue;
+            	}
+            	if(j==0) {
+            		arr[i][j]=i;
+            		continue;
+            	}
                 int i1;
                 int j1;
                 int ans=Integer.MAX_VALUE;
-                if(A.charAt(i) == B.charAt(j)){
+                if(A.charAt(i-1) == B.charAt(j-1)){
                     i1=i-1;
                     j1=j-1;
                     if(i1<0 || j1<0){
@@ -44,7 +52,7 @@ public class EditDistance {
                     }else{
                         ans=arr[i1][j1];
                     }
-                }else  if(A.charAt(i) != B.charAt(j)){
+                }else  if(A.charAt(i-1) != B.charAt(j-1)){
                      i1=i-1;
                     j1=j-1;
                     int left=Integer.MAX_VALUE;
@@ -79,7 +87,7 @@ public class EditDistance {
             System.out.println();
         }
         
-        return arr[n-1][m-1];
+        return arr[n][m];
         
     }
     int min(int a,int b,int c) {
