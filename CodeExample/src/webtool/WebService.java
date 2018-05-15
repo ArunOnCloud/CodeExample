@@ -2,103 +2,96 @@ package webtool;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-
-import com.sun.net.ssl.HttpsURLConnection;
+import java.util.Map;
 
 public class WebService {
 
-	
-	
-	private final String USER_AGENT = "Mozilla/5.0";
+	public static String callService(
+			String type, 
+			String uri, 
+			String request,
+			Map<String, String> requestHeaders) {
 
-	public static void main(String[] args) throws Exception {
+		URL url;
+		HttpURLConnection connection = null;
 
-		WebService http = new WebService();
+		try {
+			// Create connection
+			url = new URL(uri);
+			connection = (HttpURLConnection) url.openConnection();
+			connection.setRequestMethod(type);
 
-		System.out.println("Testing 1 - Send Http GET request");
-		http.sendGet();
+			if (requestHeaders != null) {
+				for (Map.Entry<String, String> requestHeader : requestHeaders
+						.entrySet()) {
+					if (requestHeader.getKey().equals("Content-Length")) {
+						connection.setRequestProperty("Content-Length",
+								Integer.toString(request.length()));
+					} else {
+						connection.setRequestProperty(requestHeader.getKey(),
+								requestHeader.getValue());
+					}
+				}
 
-		System.out.println("\nTesting 2 - Send Http POST request");
-		http.sendPost();
+			}
+			// log.info(connection.getRequestProperties());
 
-	}
+			connection.setUseCaches(false);
+			connection.setDoInput(true);
+			connection.setDoOutput(true);
+			connection.setConnectTimeout(60 * 5 * 10000);
 
-	// HTTP GET request
-	private void sendGet() throws Exception {
+			// Send request
+			if (request != null) {
+				DataOutputStream wr = new DataOutputStream(
+						connection.getOutputStream());
+				wr.writeBytes(request);
+				wr.flush();
+				wr.close();
+			}
+			// Get Response
+			InputStream is = connection.getInputStream();
+			BufferedReader rd = new BufferedReader(new InputStreamReader(is));
+			String line;
+			StringBuffer response = new StringBuffer();
 
-		String url = "http://www.google.com/search?q=mkyong";
+			while ((line = rd.readLine()) != null) {
+				response.append(line);
+				response.append(' ');
+			}
 
-		URL obj = new URL(url);
-		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-
-		// optional default is GET
-		con.setRequestMethod("GET");
-
-		//add request header
-		con.setRequestProperty("User-Agent", USER_AGENT);
-
-		int responseCode = con.getResponseCode();
-		System.out.println("\nSending 'GET' request to URL : " + url);
-		System.out.println("Response Code : " + responseCode);
-
-		BufferedReader in = new BufferedReader(
-		        new InputStreamReader(con.getInputStream()));
-		String inputLine;
-		StringBuffer response = new StringBuffer();
-
-		while ((inputLine = in.readLine()) != null) {
-			response.append(inputLine);
+			rd.close();
+ 			return response.toString().trim();
+		} catch (Exception e) {
+			System.out.println("Exception in service->" + request);
+			e.printStackTrace();
+			StringBuffer response = new StringBuffer();
+			try {
+				InputStream is1 = connection.getErrorStream();
+				if (is1 != null) {
+					BufferedReader rd1 = new BufferedReader(
+							new InputStreamReader(is1));
+					String line1;
+					while ((line1 = rd1.readLine()) != null) {
+						response.append(line1);
+						response.append(' ');
+					}
+				}
+				System.out.println("Exception in service->" + response.toString());
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+			return response.toString();
+		} finally {
+			if (connection != null) {
+				connection.disconnect();
+			}
 		}
-		in.close();
-
-		//print result
-		System.out.println(response.toString());
-
-	}
-
-	// HTTP POST request
-	private void sendPost() throws Exception {
-
-		String url = "https://selfsolve.apple.com/wcResults.do";
-		URL obj = new URL(url);
-		@SuppressWarnings("deprecation")
-		HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
-
-		//add reuqest header
-		con.setRequestMethod("POST");
-		con.setRequestProperty("User-Agent", USER_AGENT);
-		con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
-
-		String urlParameters = "sn=C02G8416DRJM&cn=&locale=&caller=&num=12345";
-
-		// Send post request
-		con.setDoOutput(true);
-		DataOutputStream wr = new DataOutputStream(con.getOutputStream());
-		wr.writeBytes(urlParameters);
-		wr.flush();
-		wr.close();
-
-		int responseCode = con.getResponseCode();
-		System.out.println("\nSending 'POST' request to URL : " + url);
-		System.out.println("Post parameters : " + urlParameters);
-		System.out.println("Response Code : " + responseCode);
-
-		BufferedReader in = new BufferedReader(
-		        new InputStreamReader(con.getInputStream()));
-		String inputLine;
-		StringBuffer response = new StringBuffer();
-
-		while ((inputLine = in.readLine()) != null) {
-			response.append(inputLine);
-		}
-		in.close();
-
-		//print result
-		System.out.println(response.toString());
-
 	}
 
 }
