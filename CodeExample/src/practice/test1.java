@@ -1,4 +1,5 @@
 package practice;
+import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -15,7 +16,7 @@ public class test1 {
     }
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-        Date d=new Date();
+       /* Date d=new Date();
         Date d2=(Date)d.clone();
         System.out.println("date:"+d);
         
@@ -44,13 +45,18 @@ public class test1 {
 				e.printStackTrace();
 			}
         	System.out.println("sd:"+sd);
-        	System.out.println("ed:"+ed);
+        	System.out.println("ed:"+ed);*/
         /*String str=sd.toString();
         System.out.println(str);
         System.out.println("sd:"+str1);*/
         /*String str="15/11/1992";
         System.out.println(" "+fun(str));*/
-        
+        String str="C:/Users/arunram/Desktop/temp/BAJAJ/[B@d6f07b9";
+        File file=new File(str);
+        if(!file.isDirectory())
+        {
+        	System.out.print("created directory:"+file.mkdirs());
+        }
         
 	}
 

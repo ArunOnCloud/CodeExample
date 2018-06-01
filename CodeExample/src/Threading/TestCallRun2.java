@@ -5,6 +5,7 @@ class TestCallRun2 extends Thread {
 		for (int i = 1; i < 5; i++) {
 			try {
 				Thread.sleep(500);
+				//System.out.println(i);
 			} catch (InterruptedException e) {
 				System.out.println(e);
 			}
@@ -16,8 +17,8 @@ class TestCallRun2 extends Thread {
 		TestCallRun2 t1 = new TestCallRun2();
 		TestCallRun2 t2 = new TestCallRun2();
 
-		//t1.run();
-		//t2.run();
+		t1.run();
+		t2.run();
 		Thread.sleep(100L);
 	}
 }

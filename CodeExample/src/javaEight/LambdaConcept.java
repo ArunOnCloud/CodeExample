@@ -16,7 +16,9 @@ public class LambdaConcept {
 	      // Convert Kilometers to Miles
 	      System.out.println(convert(input -> input/1.609344, 8));
 	      
+	      Converter con=(input)-> {System.out.println(input);return input;};
 	      
+	      System.out.println(con.convert(9));
 	    
 
 	}
