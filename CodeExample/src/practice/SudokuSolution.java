@@ -64,10 +64,57 @@ public class SudokuSolution {
 				boardUtil[i][j]=board[i][j];
 		}
 		//solveSudokuUtil(board, boardUtil);
-		solveUtil(board,boardUtil);
-		printBoard(boardUtil);
+		//solveUtil(board,boardUtil);
+		util(board,0);
+		printBoard(board);
+		//printBoard(boardUtil);
 		System.out.println(checkBox(boardUtil, 1, 1));
 	}
+	boolean util(char[][] board,int ind)
+    {
+        //System.out.println("ind:"+ind);
+        if(ind == 81)
+        {
+            return true;
+        }else
+        {
+            //System.out.println("ind1:"+ind);
+            int r=ind/9;
+            int c=ind%9;
+            if(board[r][c]!='.')
+            {
+                return util(board,ind+1);
+            }
+            for(int i=1;i<=9;i++)
+            {
+                Integer temp=i;
+                char ch=temp.toString().charAt(0);
+                //System.out.println("ch:"+ch);
+                if(board[r][c] == '.')
+                {
+                    board[r][c] =ch;
+                    if(isSafe( board,r,c))
+                    {
+                       // System.out.println("is safe ch:"+ch);
+                         if(util(board,ind+1) )
+                       {
+                           return true;
+                       }else
+                       {
+                           board[r][c] = '.';
+                       }
+                    }else
+                    {
+                         board[r][c] = '.';
+                    }
+                  
+                }
+                
+            }
+            return false;
+            
+        }
+    }
 	int ind=0;
 	public boolean solveSudokuUtil(char[][] board,char[][] boardUtil)
 	{
