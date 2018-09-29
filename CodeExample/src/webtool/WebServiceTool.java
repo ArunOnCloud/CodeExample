@@ -14,7 +14,6 @@ import java.util.Map;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import com.sun.net.ssl.HttpsURLConnection;
 
 public class WebServiceTool {
 

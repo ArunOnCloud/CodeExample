@@ -5,7 +5,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import com.nostra13.universalimageloader.core.assist.deque.LinkedBlockingDeque;
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Collections;
 
 public class CustomHashCode {
 

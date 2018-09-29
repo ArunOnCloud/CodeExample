@@ -2,7 +2,6 @@ package Threading;
 
 import java.util.concurrent.ThreadPoolExecutor;
 
-import com.sun.corba.se.spi.orbutil.threadpool.ThreadPool;
 
 public class ThreadLocking extends Thread{
 	@Override
