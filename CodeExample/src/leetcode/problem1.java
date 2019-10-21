@@ -1,7 +1,9 @@
 package leetcode;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -19,8 +21,53 @@ public class problem1 {
 		}
 		System.out.println(ar);
 		//[[3,4],[2,3],[1,2]]
+		String[] array=new String[5];
+		//Collections.EMPTY_LIST
+		String par="Bob hit a ball, the hit BALL flew far after it was hit.";
+		String[] banned=new String[]{"hit"};
+		mostCommonWord(par, banned);
 
 	}
+	
+	public static String mostCommonWord(String paragraph, String[] banned) {
+        Map<String,Integer> map=new HashMap<>();
+        
+        String par=paragraph.toLowerCase().replaceAll("\\."," ");
+        //!?',;.
+        par=par.toLowerCase().replaceAll(","," ");
+        par=par.toLowerCase().replaceAll("!"," ");
+        par=par.toLowerCase().replaceAll("?"," ");
+        par=par.toLowerCase().replaceAll("'"," ");
+        par=par.toLowerCase().replaceAll(";"," ");
+        String[] words=par.split(" ");
+        for(String word:words){
+            System.out.println(word);
+            Integer val=map.get(word);
+            if(val == null){
+                map.put(word,1);
+            }else{
+                map.put(word,val+1);
+            }
+            
+        }
+        
+        for(String word:banned){
+            if(map.containsKey(word)){
+                map.remove(word);
+            }
+        }
+        String ans="";
+        int count=0;
+        for(Map.Entry<String,Integer> entry: map.entrySet()){
+            if(entry.getValue() >count){
+                ans=entry.getKey();
+                count=entry.getValue();
+            }
+        }
+        return ans;
+        
+    }
+	
 public int countSubstrings(String s) {
 	    int n=s.length();
         int[] ans=new int[s.length()];

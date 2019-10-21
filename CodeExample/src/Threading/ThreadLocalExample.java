@@ -10,6 +10,8 @@ public class ThreadLocalExample {
 		Mythreand t2=new Mythreand(tl, "second  Thread");
 		t1.start();
 		t2.start();
+		//
+		
 		
 
 	}

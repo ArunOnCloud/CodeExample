@@ -1,4 +1,4 @@
-package Hackerearth;
+package hackerearth;
 
 /* IMPORTANT: Multiple classes and nested static classes are supported */
 

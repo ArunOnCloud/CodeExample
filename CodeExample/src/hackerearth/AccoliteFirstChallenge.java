@@ -1,4 +1,4 @@
-package Hackerearth;
+package hackerearth;
 
 public class AccoliteFirstChallenge {
 

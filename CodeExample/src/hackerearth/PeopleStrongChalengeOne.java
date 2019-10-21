@@ -1,4 +1,4 @@
-package Hackerearth;
+package hackerearth;
 
 public class PeopleStrongChalengeOne {
    static long mod = 10000000011L;
